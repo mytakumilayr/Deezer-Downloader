@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+<Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT" follow="true">
+        <PatternLayout pattern="%d{ISO8601} %p %C{1}.%M:%L - %m%n"/>
+    </Console>
+    <!--<File name="FILE" fileName="DeezerDownloader.log" append="false">-->
+        <!--<PatternLayout pattern="%d{ISO8601} %p %C{1}.%M:%L - %m%n"/>-->
+    <!--</File>-->
+</Appenders>
+<Loggers>
+    <Logger name="org.apache.log4j.xml" level="trace"/>
+    <Root level="trace">
+        <AppenderRef ref="STDOUT"/>
+        <!--<AppenderRef ref="FILE"/>-->
+    </Root>
+</Loggers>
+</Configuration>

@@ -1,0 +1,80 @@
+apply plugin: 'kotlin'
+apply plugin: "kotlin-noarg"
+apply plugin: 'edu.sc.seis.launch4j'
+apply plugin: "application"
+
+mainClassName = "de.bigboot.deezerdownloader.Main"
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-noarg',         version: kotlin_version
+        classpath group: 'edu.sc.seis.gradle',   name: 'launch4j',             version: launch4j_Version
+    }
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+    jcenter()
+}
+
+dependencies {
+    compile group: 'de.jensd',                   name: 'fontawesomefx',        version: fontawesomefx_version
+    compile group: 'org.controlsfx',             name: 'controlsfx',           version: controlsfx_version
+    compile group: 'org.jetbrains.kotlin',       name: 'kotlin-stdlib',        version: kotlin_version
+    compile group: 'nl.komponents.kovenant',     name: 'kovenant-jfx',         version: kovenant_version
+
+    compile project(':core')
+    compile project(':RubberbandListView')
+}
+
+task pack(type: Jar) {
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    from {configurations.compile.collect {zipTree(it)}}
+
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}
+task distJar(type: Copy) {
+    from (pack.outputs.files) {
+        rename { filename -> "${rootProject.name}.jar"}
+    }
+    into rootProject.projectDir.getAbsolutePath() + '/dist/'
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+noArg {
+    annotation("de.bigboot.deezerdownloader.DefaultNoArgConstructor")
+}
+
+launch4j {
+    mainClassName = project.mainClassName
+    icon = "$projectDir/app.ico"
+    outfile = "${rootProject.name}.exe"
+    jvmOptions = [ "-Dlaunch4j.exefile=\"%EXEFILE%\"" ]
+
+
+    copyConfigurable = pack.outputs.files
+}
+
+pack.dependsOn classes
+
+
+distJar.dependsOn(getTasksByName("createExe", true)[0])
+distJar.dependsOn pack
+
+task distExe(type: Copy) {
+    from "build/launch4j/${rootProject.name}.exe"
+    into rootProject.projectDir.getAbsolutePath() + '/dist/'
+}
+distExe.dependsOn(getTasksByName("createExe", true)[0])
+distExe.dependsOn pack

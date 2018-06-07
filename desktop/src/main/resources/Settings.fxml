@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.PropertySheet?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" stylesheets="@Downloader.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.bigboot.deezerdownloader.SettingsController">
+   <styleClass>
+      <String fx:value="rootPane" />
+      <String fx:value="native" />
+      <String fx:value="settings" />
+   </styleClass>
+   <center>
+      <VBox>
+         <children>
+            <StackPane maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" styleClass="content" VBox.vgrow="ALWAYS">
+               <children>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0">
+                     <content>
+                        <VBox fx:id="simpleSettingsPane" prefHeight="200.0" prefWidth="351.0" spacing="5.0">
+                           <TitledPane animated="false" collapsible="false" text="%settings.general">
+                              <VBox>
+                                 <CheckBox fx:id="nativeCheckboxView" mnemonicParsing="false" text="%settings.native_window">
+                                    <VBox.margin>
+                                       <Insets top="7.0" />
+                                    </VBox.margin>
+                                 </CheckBox>
+                              </VBox>
+                           </TitledPane>
+                           <TitledPane animated="false" collapsible="false" text="%settings.output">
+                              <VBox spacing="5.0">
+                                 <Label text="%settings.quality" />
+                                 <Slider fx:id="maxQualityView" blockIncrement="1.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" showTickLabels="true" snapToTicks="true" value="3.0" />
+                                 <Label text="%settings.image_quality" />
+                                 <HBox spacing="5.0">
+                                    <children>
+                                       <Slider fx:id="imageSize" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" min="1.0" minorTickCount="0" showTickLabels="true" snapToTicks="true" value="4.0" HBox.hgrow="ALWAYS">
+                                          <HBox.margin>
+                                             <Insets />
+                                          </HBox.margin>
+                                          <padding>
+                                             <Insets right="30.0" />
+                                          </padding>
+                                       </Slider>
+                                       <Spinner fx:id="imageSizeCustom" disable="true" editable="true" prefWidth="70.0" />
+                                    </children>
+                                 </HBox>
+                                 <Label text="%settings.cover_type" />
+                                 <ComboBox fx:id="covertype" maxWidth="1.7976931348623157E308">
+                                    <VBox.margin>
+                                       <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                 </ComboBox>
+                                 <Label text="%settings.output_folder" />
+                                 <HBox>
+                                    <TextField fx:id="outputFolderView" maxWidth="1.7976931348623157E308" style="-fx-background-insets: 0px, 1px 0px 1px 1px;" styleClass="first" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#onOutputFolderChangePressed" styleClass="last" text="..." />
+                                 </HBox>
+                                 <HBox spacing="5.0">
+                                    <children>
+                                       <Label maxHeight="1.7976931348623157E308" text="%settings.existing_file" />
+                                       <ComboBox fx:id="existingFileBehaviour" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                          <padding>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </padding>
+                                       </ComboBox>
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                       <CheckBox fx:id="embedGenres" maxWidth="1.7976931348623157E308" mnemonicParsing="false" />
+                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                             <Label maxWidth="1.7976931348623157E308" text="%settings.embed_genre" HBox.hgrow="ALWAYS" />
+                                             <Label text="%settings.genre_separator" />
+                                             <TextField fx:id="genreSeparator" prefColumnCount="1" text=" " />
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </HBox>
+                              </VBox>
+                           </TitledPane>
+                           <TitledPane animated="false" collapsible="false" contentDisplay="RIGHT" text="%settings.filenames">
+                              <graphic>
+                                 <Label fx:id="filenameHelp" style="-fx-border-width: 1px; -fx-border-radius: 2px; -fx-border-color: rgba(0, 0, 0, 0.2); -fx-padding: 0 2 0 2;" text="?">
+                                    <cursor>
+                                       <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                 </Label>
+                              </graphic>
+                              <VBox spacing="5.0">
+                                 <Label text="%settings.single_tracks" />
+                                 <HBox>
+                                    <TextField fx:id="trackTemplateView" HBox.hgrow="ALWAYS" />
+                                    <Label text=".mp3" />
+                                 </HBox>
+                                 <Label text="%settings.albums" />
+                                 <HBox>
+                                    <TextField fx:id="albumTemplateView" HBox.hgrow="ALWAYS" />
+                                    <Label text=".mp3" />
+                                 </HBox>
+                                 <Label text="%settings.playlists" />
+                                 <HBox>
+                                    <TextField fx:id="playlistTemplateView" HBox.hgrow="ALWAYS" />
+                                    <Label text=".mp3" />
+                                 </HBox>
+                                 <Label text="%settings.toplists" />
+                                 <HBox>
+                                    <TextField fx:id="toplistTemplateView" HBox.hgrow="ALWAYS" />
+                                    <Label text=".mp3" />
+                                 </HBox>
+                              </VBox>
+                           </TitledPane>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <BorderPane fx:id="advancedSettingsPane" minHeight="0.0" minWidth="9.0" prefHeight="0.0" visible="false">
+                     <center>
+                        <PropertySheet fx:id="settingsTable" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <ToggleButton fx:id="advancedSettingsButton" mnemonicParsing="false" text="%settings.advanced" />
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <Label text="%settings.version">
+                     <padding>
+                        <Insets right="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="version" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

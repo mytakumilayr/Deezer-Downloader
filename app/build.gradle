@@ -1,0 +1,84 @@
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    dataBinding {
+        enabled = true
+    }
+
+    signingConfigs {
+        release
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    defaultConfig {
+        applicationId "de.bigboot.deezerdownloader"
+        minSdkVersion 18
+        targetSdkVersion 25
+        versionCode 1
+        versionName app_version
+        multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+}
+
+apply from: 'https://raw.github.com/trikita/gradle-android-signing/master/gradle-android-signing.gradle'
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile group: 'cn.dreamtobe.filedownloader',       name: 'filedownloader-okhttp3-connection',  version: filedownloader_okhttpconnection_version
+    compile group: 'com.android.support',               name: 'support-vector-drawable',            version: android_support_version
+    compile group: 'com.android.support',               name: 'design',                             version: android_support_version
+    compile group: 'com.android.support',               name: 'multidex',                           version: multidex_version
+    compile group: 'com.android.support',               name: 'recyclerview-v7',                    version: android_support_version
+    compile group: 'com.android.support',               name: 'support-v4',                         version: android_support_version
+    compile group: 'com.android.support.constraint',    name: 'constraint-layout',                  version: constraintlayout_version
+    compile group: 'com.github.MFlisar',                name: 'DragSelectRecyclerView',             version: dragselectrecyclerview_version
+    compile group: 'com.karumi',                        name: 'dexter',                             version: dexter_version
+    compile group: 'com.liulishuo.filedownloader',      name: 'library',                            version: filedownloader_version
+    compile group: 'com.nononsenseapps',                name: 'filepicker',                         version: filepicker_version
+    compile group: 'com.squareup.picasso',              name: 'picasso',                            version: picasso_version
+    compile group: 'com.takisoft.fix',                  name: 'preference-v7',                      version: "${android_support_version}.${android_preference_fix_version}"
+    compile group: 'nl.komponents.kovenant',            name: 'kovenant-android',                   version: kovenant_version
+    compile group: 'org.jetbrains.kotlin',              name: 'kotlin-stdlib',                      version: kotlin_version
+
+    compile project(":core")
+}

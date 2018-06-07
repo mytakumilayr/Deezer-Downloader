@@ -1,0 +1,223 @@
+.toolbutton {
+    -fx-background-color: transparent, transparent, transparent, transparent;
+}
+
+.toolbutton:hover{
+    -fx-background-color: transparent, rgba(0,0,0,.1), rgba(0,0,0,.1), transparent;;
+}
+
+.toolbutton:armed {
+    -fx-background-color: transparent, rgba(0,0,0,.1), rgba(0,0,0,.1), rgba(0,0,0,.2);;
+}
+
+.search-icon {
+    -fx-shape: "M11.936,13.663c-1.105,0.694-2.412,1.095-3.81,1.095c-3.963,0-7.188-3.224-7.188-7.187c0-3.963,3.224-7.188,7.188-7.188 c3.963,0,7.187,3.224,7.187,7.188c0,1.854-0.706,3.546-1.862,4.822l4.23,4.602c0.374,0.407,0.347,1.039-0.06,1.413 c-0.192,0.176-0.435,0.264-0.676,0.264c-0.271,0-0.54-0.109-0.737-0.323 M8.125,2.384c-2.86,0-5.188,2.327-5.188,5.188 s2.327,5.187,5.188,5.187s5.187-2.327,5.187-5.187S10.986,2.384,8.125,2.384z";
+    -fx-background-color: #595959;
+    -fx-background-insets: 0 6 0 -6;
+    -fx-min-width: 10;
+    -fx-max-width: 10;
+    -fx-min-height: 10;
+    -fx-max-height: 10;
+}
+
+.downloads-header {
+    -fx-font-size: 14;
+}
+
+.cover-image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 0.0, 0.0);
+}
+
+.list-cell {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.fancy.rootPane {
+    -fx-border-insets: 50;
+    -fx-background-insets: 50;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: gray;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 50, 0.5, 0, 0);
+}
+
+.fancy .window-title {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.fancy .close {
+    -fx-background-color: linear-gradient(to bottom, rgb(226, 0, 0) 30%, rgb(190, 0, 0) 70%)
+}
+
+.fancy .close:hover {
+    -fx-background-color: linear-gradient(to bottom, rgb(234, 0, 0) 30%, rgb(209, 0, 0) 70%)
+}
+
+.fancy .close:pressed {
+    -fx-background-color: linear-gradient(to bottom, rgb(186, 0, 0) 30%, rgb(164, 0, 0) 70%)
+}
+.native .window-title,
+.native .window-icon,
+.native .close {
+    visibility: hidden !important;
+}
+
+.progress-indicator {
+    -fx-progress-color: rgb(224, 224, 224);
+}
+
+.progress-bar > .track {
+    -fx-background-radius: 0;
+    -fx-background-color: linear-gradient(to top, #b7b7b7 30%, #d4d4d4 70%);
+}
+
+.progress-bar > .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: linear-gradient(to top, #3189c4 30%, #3692d2 70%);
+}
+
+.progress-bar.state-finished > .bar,
+.progress-bar.state-skipped > .bar{
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(to top, #8bc34a 30%, #a6e14d 70%);
+}
+
+.progress-bar.yellow > .bar {
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(to top, #ebd739 30%, #ffeb3b 70%);
+}
+
+.progress-bar.state-error > .bar {
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(to top, #ff3e57 30%, #ff585d 70%);
+}
+
+.list-cell:empty {
+    -fx-background-color: white;
+}
+
+.button.first, .menu-button.first, .toggle-button.first, .text-field.first, .text-area.first {
+    -fx-border-radius: 4 0 0 4;
+    -fx-background-radius: 4 0 0 4;
+}
+
+.split-menu-button.first > .arrow-button, .split-menu-button.middle > .arrow-button {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/*middle*/
+.middle {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button.middle, .text-field.middle, .text-area.middle, .split-menu-button.middle, .toggle-button.middle {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button.last, .text-field.last, .text-area.last, .split-menu-button.last, .toggle-button.last, .menu-button.last {
+    -fx-border-radius: 0 4 4 0;
+    -fx-background-radius: 0 4 4 0;
+}
+
+/* close button position*/
+.close-left {
+    visibility: visible;
+}
+
+.close-right {
+    visibility: hidden;
+}
+
+/* switch positions on windows */
+.os-win .close-left {
+    visibility: hidden;
+}
+
+.os-win .close-right {
+    visibility: visible;
+}
+
+
+
+.tab-pane {
+    -fx-tab-min-width:90px;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0px;
+    -fx-padding: 0.416667em 0.5em 0.416667em 0.5em;
+    -fx-pref-height: 36px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px 1px 0px 1px;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0px;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-font-size: 12px;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #1d1d1d;
+    -fx-font-weight: bold;
+}
+
+.tab-pane:focused .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.download-item #titleView {
+    -fx-max-width: 170px;
+}
+
+.download-item .button {
+    -fx-background-color: linear-gradient(to bottom, rgb(171, 171, 171) 30%, rgb(138, 138, 138) 70%);
+    -fx-border-width: 0px;
+    -fx-background-radius: 100%;
+    -fx-pref-height: 16px;
+    -fx-min-height: 16px;
+    -fx-pref-width: 16px;
+    -fx-min-width: 16px;
+    -fx-font-size: 10px;
+    -fx-opacity: 0.6;
+}
+.download-item .button:hover {
+    -fx-background-color: linear-gradient(to bottom, rgb(234, 0, 0) 30%, rgb(209, 0, 0) 70%);
+    -fx-opacity: 1.0;
+}
+.download-item .button:pressed {
+    -fx-background-color: linear-gradient(to bottom, rgb(186, 0, 0) 30%, rgb(164, 0, 0) 70%);
+    -fx-opacity: 1.0;
+}
+
+.download-item .button:hover .glyph-icon,
+.download-item .button:pressed .glyph-icon {
+    -fx-fill: white;
+}
+
+.settings.rootPane {
+    -fx-padding: 0 0 0 0;
+}
+
+.settings .content {
+    -fx-padding: 0 0 5 0;
+}

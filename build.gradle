@@ -1,0 +1,28 @@
+allprojects {
+    version = app_version
+
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1'
+}
+
+task distDesktop(type: GradleBuild) {
+    setTasks(['clean', 'distJar', 'distExe'])
+}
+
+task distAndroid(type: Copy) {
+    from ('app/build/outputs/apk/app-release.apk') {
+        rename { "${rootProject.name}.apk" }
+    }
+    into 'dist'
+    dependsOn 'app:assembleRelease'
+}

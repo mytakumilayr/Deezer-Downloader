@@ -1,0 +1,101 @@
+apply plugin: 'kotlin'
+apply plugin: "kotlin-noarg"
+apply plugin: 'edu.sc.seis.launch4j'
+
+project.ext.mainClassName = "MainKt"
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-noarg', version: kotlin_version
+        classpath group: 'edu.sc.seis.gradle', name: 'launch4j', version: launch4j_Version
+    }
+}
+
+repositories {
+    maven { url "https://dl.bintray.com/ijabz/maven" }
+    jcenter()
+}
+
+dependencies {
+    compile group: 'com.squareup.okhttp3',          name: 'okhttp',             version: okhttp_version
+    compile group: 'javax.cache',                   name: 'cache-api',          version: cacheapi_version
+    compile group: 'org.apache.logging.log4j',      name: 'log4j-core',         version: log4j_version
+    compile group: 'org.apache.logging.log4j',      name: 'log4j-api',          version: log4j_version
+    compile group: 'org.apache.logging.log4j',      name: 'log4j-slf4j-impl',   version: log4j_version
+    compile group: 'org.ehcache',                   name: 'ehcache',            version: ehcache_version
+    compile group: 'org.jetbrains.kotlin',          name: 'kotlin-stdlib',      version: kotlin_version
+    compile group: 'org.slf4j',                     name: 'slf4j-api',          version: slf4j_version
+    compile group: 'org.terracotta',                name: 'management-model',   version: managementmodel_version
+    compile group: 'nl.komponents.kovenant',        name: 'kovenant',           version: kovenant_version
+    compile group: 'nl.komponents.kovenant',        name: 'kovenant-ui',        version: kovenant_version
+    compile group: 'com.gitlab.DeezerDownloader',   name: 'jaudiotagger',       version: jaudiotagger_version
+
+    compile project(':deezer-api-client')
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+noArg {
+    annotation("de.bigboot.deezerdownloader.DefaultNoArgConstructor")
+}
+
+
+task fillVersion(type: Copy) {
+    from 'src/main/resources/app.properties'
+    into sourceSets.main.output.resourcesDir
+    expand([
+            version: rootProject.version
+    ])
+}
+fillVersion.dependsOn processResources
+classes.dependsOn fillVersion
+
+task i18n << {
+    def source = 'src/main/kotlin'   // Kotlin source path of the project.
+    def pack = 'de.bigboot.deezerdownloader.i18n'                // Enum target package.
+    def name = 'CoreStrings'                 // Enum class name.
+    def fileName = 'Core.kt'          // Name of Kotlin file containing the enum.
+    def bundle = 'src/main/resources/strings.properties' // Path to i18n bundle file.
+
+    println("Processing i18n bundle file at ${bundle}...")
+    def builder = new StringBuilder()
+    builder.append("""  |package ${pack}
+                        |import kotlinExtensions.java.BundleLine
+                        |/** Generated from ${bundle} file. */
+                        |enum class ${name} : BundleLine {
+                        |""".stripMargin())
+    def newLine = System.getProperty("line.separator")
+    file(bundle).eachLine {
+        def data = it.trim()
+        def separator = data.indexOf('=')
+        if (!data.isEmpty() && separator > 0 && !data.startsWith('#')) {
+            def id = data.substring(0, separator)
+            builder.append('    `').append(id.replace('.', '__')).append('`,').append(newLine)
+        }
+    }
+    builder.append('    ;').append(newLine).append('}').append(newLine)
+
+    source = source.replace('/', File.separator)
+    pack = pack.replace('.', File.separator)
+    def path = source + File.separator + pack +
+            File.separator + fileName
+    println("Saving i18n bundle enum at ${path}...")
+    def enumFile = file(path)
+    delete enumFile
+    enumFile.getParentFile().mkdirs()
+    enumFile.createNewFile()
+    enumFile << builder << newLine
+    println("Done. I18n bundle enum generated.")
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+classes.dependsOn i18n

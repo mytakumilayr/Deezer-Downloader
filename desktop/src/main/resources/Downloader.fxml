@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.rubberbandlistview.RubberbandListView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<BorderPane fx:id="root" minHeight="200" minWidth="500" prefHeight="600.0" prefWidth="780.0" stylesheets="@Downloader.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.bigboot.deezerdownloader.DownloaderController">
+   <top>
+      <StackPane BorderPane.alignment="CENTER">
+         <ToolBar prefHeight="40.0" prefWidth="200.0" />
+         <GridPane fx:id="toolbarView" hgap="5.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+               <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               <ColumnConstraints hgrow="ALWAYS" maxWidth="200.0" minWidth="200.0" />
+               <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+               <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+               <Button fx:id="closeLeft" focusTraversable="false" mnemonicParsing="false" onAction="#onCloseButtonPressed" styleClass="close, close-left">
+                  <graphic>
+                     <de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView glyphName="TIMES" glyphStyle="-fx-fill: rgba(255, 255, 255, 0.8);" />
+                  </graphic>
+                  <textFill>
+                     <LinearGradient>
+                        <stops>
+                           <Stop color="BLACK" />
+                           <Stop color="WHITE" offset="1.0" />
+                        </stops>
+                     </LinearGradient>
+                  </textFill>
+               </Button>
+               <ImageView pickOnBounds="true" preserveRatio="true" styleClass="window-icon" GridPane.columnIndex="1">
+                  <Image url="@icon-32.png" />
+               </ImageView>
+               <Label styleClass="window-title" text="%app.title" GridPane.columnIndex="2" />
+               <StackPane maxHeight="1.7976931348623157E308" GridPane.columnIndex="3">
+                  <TextField fx:id="searchView" maxWidth="1.7976931348623157E308" prefWidth="400.0" promptText="%main.search">
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                  </TextField>
+                  <Pane styleClass="search-icon" StackPane.alignment="CENTER_RIGHT">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Pane>
+               </StackPane>
+               <Button mnemonicParsing="false" onAction="#onSettingsButtonClicked" GridPane.columnIndex="4">
+               <graphic>
+                  <de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView glyphName="WRENCH" />
+               </graphic>
+            </Button>
+               <Button fx:id="closeRight" focusTraversable="false" mnemonicParsing="false" onAction="#onCloseButtonPressed" styleClass="close, close-right" GridPane.columnIndex="5">
+                  <graphic>
+                     <de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView glyphName="TIMES" glyphStyle="-fx-fill: rgba(255, 255, 255, 0.8);" />
+                  </graphic>
+                  <textFill>
+                     <LinearGradient>
+                        <stops>
+                           <Stop color="BLACK" />
+                           <Stop color="WHITE" offset="1.0" />
+                        </stops>
+                     </LinearGradient>
+                  </textFill>
+               </Button>
+            </children>
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding>
+         </GridPane>
+      </StackPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <StackPane BorderPane.alignment="CENTER">
+               <TabPane fx:id="searchResultsContainer">
+                  <tabs>
+                     <Tab closable="false" text="%main.tracks">
+                        <content>
+                           <de.rubberbandlistview.RubberbandListView fx:id="searchResultsTracksView" prefHeight="200.0" prefWidth="200.0">
+                              <placeholder>
+                                 <Label text="%main.no_results" />
+                              </placeholder>
+                           </de.rubberbandlistview.RubberbandListView>
+                        </content>
+                     </Tab>
+                     <Tab closable="false" text="%main.albums">
+                        <content>
+                           <de.rubberbandlistview.RubberbandListView fx:id="searchResultsAlbumsView" prefHeight="200.0" prefWidth="200.0">
+                              <placeholder>
+                                 <Label text="%main.no_results" />
+                              </placeholder>
+                           </de.rubberbandlistview.RubberbandListView>
+                        </content>
+                     </Tab>
+                     <Tab closable="false" text="%main.playlists">
+                        <content>
+                           <de.rubberbandlistview.RubberbandListView fx:id="searchResultsPlaylistsView" prefHeight="200.0" prefWidth="200.0">
+                              <placeholder>
+                                 <Label text="%main.no_results" />
+                              </placeholder>
+                           </de.rubberbandlistview.RubberbandListView>
+                        </content>
+                     </Tab>
+                     <Tab closable="false" text="%main.artists">
+                        <content>
+                           <de.rubberbandlistview.RubberbandListView fx:id="searchResultsArtistsView" prefHeight="200.0" prefWidth="200.0">
+                              <placeholder>
+                                 <Label text="%main.no_results" />
+                              </placeholder>
+                           </de.rubberbandlistview.RubberbandListView>
+                        </content>
+                     </Tab>
+                     <Tab closable="false" fx:id="logTab" text="%main.log" />
+                  </tabs>
+               </TabPane>
+               <ToolBar fx:id="downloadSelectedBarView" style="-fx-background-color: rgba(33, 150, 243, 0.71);" StackPane.alignment="BOTTOM_RIGHT">
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onDownloadSelectedPressed" text="%main.download_selected" />
+               </ToolBar>
+               <VBox fx:id="searchingOverlayView" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, 0.6);" visible="false">
+                  <ProgressIndicator />
+                  <Label text="%main.searching" />
+               </VBox>
+            </StackPane>
+         </center>
+         <right>
+            <VBox prefWidth="200.0" BorderPane.alignment="CENTER">
+               <ToolBar VBox.vgrow="NEVER">
+                  <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPauseButtonClicked" prefWidth="30.0" styleClass="toolbutton">
+                     <graphic>
+                        <de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView glyphName="PAUSE" />
+                     </graphic>
+                      <tooltip>
+                          <Tooltip text="%main.pause_downloads" />
+                      </tooltip>
+                  </Button>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="downloads-header" text="%main.downloads_title" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Pane HBox.hgrow="ALWAYS" />
+                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#onCleanButtonClicked" prefWidth="30.0" styleClass="toolbutton">
+                       <graphic>
+                           <de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView glyphName="TRASH_ALT" />
+                       </graphic>
+                       <tooltip>
+                           <Tooltip text="%main.clean_downloads" />
+                       </tooltip>
+                   </Button>
+               </ToolBar>
+               <ListView fx:id="downloadsView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <placeholder>
+                     <Label text="%main.no_downloads" />
+                  </placeholder>
+               </ListView>
+            </VBox>
+         </right>
+      </BorderPane>
+   </center>
+   <styleClass>
+      <String fx:value="rootPane" />
+      <String fx:value="fancy" />
+   </styleClass>
+</BorderPane>

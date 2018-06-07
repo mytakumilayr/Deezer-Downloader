@@ -1,0 +1,92 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Output">
+        <ListPreference
+            android:key="pref_max_quality"
+            android:persistent="false"
+            android:title="Maximum Quality" />
+
+        <ListPreference
+            android:key="pref_cover_size"
+            android:persistent="false"
+            android:title="Cover Size" />
+
+        <ListPreference
+            android:key="pref_cover_type"
+            android:persistent="false"
+            android:title="Cover Type" />
+
+        <Preference
+            android:title="Output Folder"
+            android:key="pref_output_folder"
+            android:persistent="false" />
+
+        <ListPreference
+            android:persistent="false"
+            android:key="pref_existing_file_behaviour"
+            android:title="Existing File Behaviour" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:persistent="false"
+            android:key="pref_embed_genres"
+            android:title="Embed Genres" />
+
+        <EditTextPreference
+            android:key="pref_genre_separator"
+            android:persistent="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:dependency="pref_embed_genres"
+            android:title="Genre Separator" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Filenames">
+
+        <EditTextPreference
+            android:key="pref_filename_tracks"
+            android:persistent="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Single Tracks" />
+
+        <EditTextPreference
+            android:key="pref_filename_albums"
+            android:persistent="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Albums" />
+
+        <EditTextPreference
+            android:key="pref_filename_playlists"
+            android:persistent="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Playlists" />
+
+        <EditTextPreference
+            android:key="pref_filename_artists"
+            android:persistent="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Toplists" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced">
+        <Preference
+            android:title="Advanced Settings"
+            android:key="pref_advanced_settings"
+            android:persistent="false">
+        </Preference>
+    </PreferenceCategory>
+
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+
+</PreferenceScreen>

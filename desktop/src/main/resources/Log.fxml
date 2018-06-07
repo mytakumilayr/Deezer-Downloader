@@ -1,0 +1,19 @@
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox prefHeight="200.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.bigboot.deezerdownloader.LoggerConsoleController">
+   <children>
+      <ListView fx:id="listViewLog" />
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+         <items>
+            <Button mnemonicParsing="false" onAction="#handleRemoveSelected" text="Selektierte löschen" />
+            <Button fx:id="buttonClearLog" mnemonicParsing="false" onAction="#handleClearLog" text="Leeren" />
+            <Button fx:id="buttonSaveLog" mnemonicParsing="false" onAction="#handleSaveLog" text="log.txt speichern" />
+            <ToggleButton fx:id="toggleButtonAutoScroll" mnemonicParsing="false" text="Auto-Scroll" />
+            <ChoiceBox fx:id="choiceBoxLogLevel" prefWidth="150.0" />
+         </items>
+      </ToolBar>
+   </children>
+</VBox>

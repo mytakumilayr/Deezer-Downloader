@@ -1,0 +1,1 @@
+[![build status](https://gitlab.com/DeezerDownloader/DeezerDownloader/badges/master/build.svg)](https://gitlab.com/DeezerDownloader/DeezerDownloader/commits/master)
